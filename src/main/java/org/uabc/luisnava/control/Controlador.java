@@ -78,7 +78,7 @@ public class Controlador {
                     break;
             }
 
-        } while (op != 7);
+        } while (op != 8);
     }
 
 
