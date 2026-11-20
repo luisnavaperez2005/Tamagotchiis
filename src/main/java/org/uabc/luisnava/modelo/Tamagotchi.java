@@ -78,4 +78,5 @@ public abstract class Tamagotchi {
         return nombre + "\nHambre: " + hambre + " puntos\nEnergia: " +energia+ " puntos\nFelicidad: " +felicidad +" puntos\nSalud: " + salud + " puntos\nY";
     }
 
+
 }
