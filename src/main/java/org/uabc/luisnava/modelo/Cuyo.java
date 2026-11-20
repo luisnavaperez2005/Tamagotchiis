@@ -98,6 +98,7 @@ public class Cuyo extends Tamagotchi implements TamagotchiActions{
         System.out.println("Cui cui");
     }
 
+
     //Esta enojado
     public void castaneoDientes(){
         System.out.println("Chac-chac");
