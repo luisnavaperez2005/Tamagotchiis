@@ -63,15 +63,14 @@ public class Controlador {
 
                 case 7:
                     int numeroDeLista = 1;
-                    System.out.println("Mostrar Lista de Tamagotchis");
-                    vista.mostrarDatos(modelo.listaJuguetes());
-                    System.out.println("Elige la mascotar: ");
                     for (int i = 0; i < modelo.getTamanoArrayList(); i++){
                         System.out.println(numeroDeLista +". "+ modelo.getArrayList().get(i).getNombre());
                         numeroDeLista++;
                     }
+                    int opcionParaMascota = vista.leerNumero("Elige la mascota: ");
 
-                    int opcionPara
+
+
 
                     break;
                 case 3:
