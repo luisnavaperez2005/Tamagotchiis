@@ -93,6 +93,7 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
         return murio;
     }
 
+
     @Override
     public int sanar() {
         return salud = 10;
