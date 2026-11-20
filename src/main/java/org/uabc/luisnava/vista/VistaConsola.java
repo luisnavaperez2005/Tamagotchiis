@@ -46,6 +46,8 @@ public class VistaConsola {
     }
 
 /*
+
+
     public void imprimirPerro(){
         System.out.println("    /^^^\\");
         System.out.println("   / * * \\");
