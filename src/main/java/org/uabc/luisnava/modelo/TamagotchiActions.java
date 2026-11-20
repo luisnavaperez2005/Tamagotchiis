@@ -8,3 +8,4 @@ public interface TamagotchiActions {
     public boolean morir();
     public int sanar();
 }
+
