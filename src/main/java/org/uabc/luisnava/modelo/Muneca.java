@@ -11,13 +11,28 @@ public class Muneca extends Tamagotchi implements TamagotchiActions{
     @Override
     public void comer(int alimento) {
         System.out.println("Estoy comiendo " + alimento);
-        alimento--;
+        hambre--;
         energia++;
+
+        if (energia > 10){
+            energia = 10;
+        }
+
+        if (hambre < 0){
+            hambre = 0;
+        }
     }
 
     @Override
     public int jugar() {
-        return 0;
+        energia--;
+        felicidad++;
+
+        if (felicidad > 10){
+            felicidad = 10;
+        }
+        return felicidad;
+
     }
 
     @Override
