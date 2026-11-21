@@ -147,19 +147,30 @@ public class Controlador {
 
                     int opcionParaMascota = vista.leerNumero("Elige la mascota: ");
                     if (opcionParaMascota >= 1 && opcionParaMascota<= modelo.getTamanoArrayList()) {
-                        Tamagotchi t;
-                        if (((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).morir() ||
-                                ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).morir() ||
-                                ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).morir() ||
-                                ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).morir()) {
-                            //Murio la mascota
+                        Tamagotchi t = modelo.getArrayList().get(opcionParaMascota - 1);
+                        boolean murio = false;
+
+                        if (t instanceof Perro) {
+                            murio = ((Perro) t).morir();
+                        }
+                        else if (t instanceof Gato) {
+                            murio = ((Gato) t).morir();
+                        }
+                        else if (t instanceof Cuyo) {
+                            murio = ((Cuyo) t).morir();
+                        }
+                        else if (t instanceof Muneca) {
+                            murio = ((Muneca) t).morir();
+                        }
+
+                        if (murio){
+
                         }
 
                         else {
                             System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
                             vista.mostrarMenuOpcionesMascotas();
                             int opcionMenuMascotas = vista.leerNumero("");
-                            t = modelo.getArrayList().get(opcionParaMascota - 1);
 
                             if (t instanceof Perro) {
                                 switch (opcionMenuMascotas) {
