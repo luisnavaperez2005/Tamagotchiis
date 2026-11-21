@@ -2,17 +2,43 @@ package org.uabc.luisnava.modelo;
 
 public class Muneca extends Tamagotchi implements TamagotchiActions{
     //¿Atributos?
+    private int nivelAburrimiento;
+    private int nivelObediencia;
 
-    public Muneca(String nombre, int hambre, int energia, int felicidad, int salud){
+    public Muneca(String nombre, int hambre, int energia, int felicidad, int salud, int nivelAburrimiento, int nivelObediencia){
         super(nombre, hambre, energia, felicidad, salud);
+        this.nivelAburrimiento = nivelAburrimiento;
+        this.nivelObediencia = nivelObediencia;
+    }
+
+    public Muneca(){
+        super("Cynthia", 2, 7, 8, 10);
+        nivelAburrimiento = 1;
+        nivelObediencia = 9;
     }
 
 
     @Override
     public void comer(int alimento) {
-        System.out.println("Estoy comiendo " + alimento);
-        hambre--;
-        energia++;
+        switch (alimento){
+            case 1:
+                System.out.println("Estoy comiendo galletas! :D");
+                energia += 3;
+                hambre -= 2;
+                break;
+            case 2:
+                System.out.println("Estoy comiendo pastel! :D");
+                energia += 2;
+                hambre -= 3;
+                break;
+            case 3:
+                System.out.println("Estoy tomando té! :D");
+                energia += 1;
+                hambre -= 1;
+                break;
+            default:
+                System.out.println("Alimento invalido! No me diste nada :,(");
+        }
 
         if (energia > 10){
             energia = 10;
@@ -92,6 +118,22 @@ public class Muneca extends Tamagotchi implements TamagotchiActions{
 
     public void reir(){
         System.out.println("JAJAJAJA :D");
+    }
+
+    public void setNivelAburrimiento(int nivelAburrimiento) {
+        this.nivelAburrimiento = nivelAburrimiento;
+    }
+
+    public int getNivelAburrimiento() {
+        return nivelAburrimiento;
+    }
+
+    public void setNivelObediencia(int nivelObediencia) {
+        this.nivelObediencia = nivelObediencia;
+    }
+
+    public int getNivelObediencia() {
+        return nivelObediencia;
     }
 
     public String toString(String toString){
