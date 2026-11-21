@@ -26,10 +26,9 @@ public class Coleccion {
         agregar(new Cuyo(nombre, hambre, energia, felicidad, salud, territorial, miedo));
     }
 
-    public void agregarMuneca(String nombre, int hambre, int energia, int felicidad, int salud){
-        agregar(new Muneca(nombre, hambre, energia, felicidad, salud));
+    public void agregarMuneca(String nombre, int hambre, int energia, int felicidad, int salud, int aburrimiento, int obediencia){
+        agregar(new Muneca(nombre, hambre, energia, felicidad, salud, aburrimiento, obediencia));
     }
-
 
     public int getTamanoArrayList(){
         return misJuguetes.size();
