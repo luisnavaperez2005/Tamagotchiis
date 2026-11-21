@@ -27,12 +27,26 @@ public class Perro extends Tamagotchi implements TamagotchiActions {
         System.out.println("Estoy comiendo un sobre de Pedigree! :D");
         hambre--;
         energia++;
+
+        if (energia > 10){
+            energia = 10;
+        }
+
+        if (hambre < 0){
+            hambre = 0;
+        }
+
     }
 
     @Override
     public int jugar() {
         energia--;
         felicidad++;
+
+        if (felicidad > 10){
+            felicidad = 10;
+        }
+
         System.out.println("El perro salio a correr! Se canso un poco!");
         return felicidad;
     }
