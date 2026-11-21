@@ -63,9 +63,9 @@ public class Cuyo extends Tamagotchi implements TamagotchiActions{
     public boolean morir() {
         boolean murio = false;
 
-        if (hambre == 0 || energia == 0 || felicidad == 0 || salud == 0){
+        if (hambre == 10){
             murio = true;
-            System.out.println("OH NO! Dejaste morir a "+ nombre + " ! IRRESPONSABLE!");
+            System.out.println("OH NO! Dejaste morir a "+ nombre + " de hambre ! IRRESPONSABLE!");
         }
 
 
@@ -114,7 +114,7 @@ public class Cuyo extends Tamagotchi implements TamagotchiActions{
 
 
     public String toString(){
-        return "Tipo de Mascota: CUYO\n"+ super.toString() + "Territorial: "+nivelTerritorial+"puntos\nMiedo" +nivelMiedo+ "puntos\n";
+        return "Tipo de Mascota: CUYO\n"+ super.toString() + "Territorial: "+nivelTerritorial+"puntos\nMiedo" +nivelMiedo+ "puntos\n\n";
     }
 
     public int getNivelTerritorial() {
