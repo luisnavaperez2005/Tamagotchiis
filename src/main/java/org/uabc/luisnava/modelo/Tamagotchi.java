@@ -75,7 +75,7 @@ public abstract class Tamagotchi {
     //Se tiene que agregar el toString de Tamagotchi
 
     public String toString(){
-        return nombre + "\nHambre: " + hambre + " puntos\nEnergia: " +energia+ " puntos\nFelicidad: " +felicidad +" puntos\nSalud: " + salud + " puntos\nY";
+        return nombre + "\nHambre: " + hambre + " puntos\nEnergia: " +energia+ " puntos\nFelicidad: " +felicidad +" puntos\nSalud: " + salud + " puntos\n";
     }
 
 
