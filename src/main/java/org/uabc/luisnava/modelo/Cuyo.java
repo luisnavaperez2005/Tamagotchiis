@@ -11,12 +11,34 @@ public class Cuyo extends Tamagotchi implements TamagotchiActions{
         this.nivelMiedo = miedo;
     }
 
+    public Cuyo(){
+        super("Sr. Cobaya", 4, 9, 7, 9);
+        nivelMiedo = 6;
+        nivelTerritorial = 2;
+    }
+
 
     @Override
     public void comer(int alimento) {
-        System.out.println("Estoy comiendo un sobre de Whiskas! :D");
-        hambre--;
-        energia++;
+        switch (alimento){
+            case 1:
+                System.out.println("Estoy comiendo hojas de lechuga! :D");
+                energia += 3;
+                hambre -= 2;
+                break;
+            case 2:
+                System.out.println("Estoy comiendo heno! :D");
+                energia += 1;
+                hambre -= 2;
+                break;
+            case 3:
+                System.out.println("Estoy comiendo pienso! :D");
+                energia += 2;
+                hambre -= 3;
+                break;
+            default:
+                System.out.println("Alimento invalido! No me diste nada :,(");
+        }
 
         if (energia > 10){
             energia = 10;
@@ -152,6 +174,15 @@ public class Cuyo extends Tamagotchi implements TamagotchiActions{
         System.out.println("El Cuyo esta girando en la rueda!");
         felicidad++;
         energia--;
+
+        if (felicidad > 10){
+            felicidad = 10;
+        }
+
+        if (energia < 0) {
+            energia = 0;
+        }
+
     }
 
 
