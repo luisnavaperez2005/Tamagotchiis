@@ -76,6 +76,43 @@ public class VistaConsola {
         System.out.println("OH NO! Dejaste morir a tu mascota! Descuidaste su salud, IRRESPONSABLE!");
     }
 
+    public int mostrarMenuComidaPerro(){
+        System.out.println("¿Qué le quieres dar de comer a tu tamagotchi Perro?");
+        System.out.println("1. Sobre Pedigree");
+        System.out.println("2. Hueso");
+        System.out.println("3. Croquetas");
+        int numero = leerDatos.nextInt();
+        leerDatos.nextLine();
+        return numero;
+    }
+    public int mostrarMenuComidaGato(){
+        System.out.println("¿Qué le quieres dar de comer a tu tamagotchi Gato?");
+        System.out.println("1. Sobre Whiskas");
+        System.out.println("2. Pescado");
+        System.out.println("3. Leche tibia");
+        int numero = leerDatos.nextInt();
+        leerDatos.nextLine();
+        return numero;
+    }
+    public int mostrarMenuComidaCuyo(){
+        System.out.println("¿Qué le quieres dar de comer a tu tamagotchi Cuyo?");
+        System.out.println("1. Lechuga");
+        System.out.println("2. Heno");
+        System.out.println("3. Pienso");
+        int numero = leerDatos.nextInt();
+        leerDatos.nextLine();
+        return numero;
+    }
+    public int mostrarMenuComidaMuneca(){
+        System.out.println("¿Qué le quieres dar de comer a tu tamagotchi Muñeca?");
+        System.out.println("1. Galleta");
+        System.out.println("2. Pastel");
+        System.out.println("3. Té");
+        int numero = leerDatos.nextInt();
+        leerDatos.nextLine();
+        return numero;
+    }
+
 
 /*
 
