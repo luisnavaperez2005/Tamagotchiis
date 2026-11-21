@@ -24,7 +24,10 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
 
     @Override
     public int jugar() {
-        return 0;
+        System.out.println("El gato se esta divirtiendo siguiendo una luz de laser!");
+        energia--;
+        felicidad++;
+        return felicidad;
     }
 
     @Override
@@ -68,9 +71,9 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
     public boolean morir() {
         boolean murio = false;
 
-        if (hambre == 0 || energia == 0 || felicidad == 0 || salud == 0){
+        if (hambre == 10){
             murio = true;
-            System.out.println("OH NO! Dejaste morir a "+ nombre + " ! IRRESPONSABLE!");
+            System.out.println("OH NO! Dejaste morir a "+ nombre + " de hambre ! IRRESPONSABLE!");
         }
 
 
@@ -96,7 +99,9 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
 
     @Override
     public int sanar() {
-        return salud = 10;
+        System.out.println("Le has dado BUPRENORFINA! Se ha curado!");
+        salud = 10;
+        return salud;
     }
 
 
@@ -118,7 +123,7 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
     }
 
     public String toString(){
-            return "Tipo de Mascota: GATO\n"+ super.toString() + "Afectividad: "+nivelAfectividad+"puntos\nCuriosidad: "+nivelCuriosidad+"puntos\n";
+            return "Tipo de Mascota: GATO\n"+ super.toString() + "Afectividad: "+nivelAfectividad+"puntos\nCuriosidad: "+nivelCuriosidad+"puntos\n\n";
     }
 
 
