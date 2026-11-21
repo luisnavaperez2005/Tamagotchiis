@@ -29,9 +29,9 @@ public class Muneca extends Tamagotchi implements TamagotchiActions{
     public boolean morir() {
         boolean murio = false;
 
-        if (hambre == 0 || energia == 0 || felicidad == 0 || salud == 0){
+        if (hambre == 10){
             murio = true;
-            System.out.println("OH NO! Dejaste morir a "+ nombre + " ! IRRESPONSABLE!");
+            System.out.println("OH NO! Dejaste morir a "+ nombre + " de hambre ! IRRESPONSABLE!");
         }
 
 
@@ -80,7 +80,7 @@ public class Muneca extends Tamagotchi implements TamagotchiActions{
     }
 
     public String toString(String toString){
-        return super.toString() + "";
+        return super.toString() + "\n\n";
     }
 
 }
