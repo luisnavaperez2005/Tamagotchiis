@@ -78,25 +78,21 @@ public class Perro extends Tamagotchi implements TamagotchiActions {
 
         if (hambre == 10){
             murio = true;
-            System.out.println("OH NO! Dejaste morir a "+ nombre + " de hambre ! IRRESPONSABLE!");
         }
 
 
         else if (energia == 0){
             murio = true;
-            System.out.println("OH NO! Dejaste morir a "+ nombre + " de sueño! IRRESPONSABLE!");
         }
 
 
         else if (felicidad == 0){
             murio = true;
-            System.out.println("OH NO! Dejaste morir a "+ nombre + " de aburrimiento! IRRESPONSABLE!");
         }
 
 
         if (salud == 0){
             murio = true;
-            System.out.println("OH NO! Dejaste morir a "+ nombre + "! Descuidaste su salud, IRRESPONSABLE!");
         }
 
         return murio;
