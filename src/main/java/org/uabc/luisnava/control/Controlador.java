@@ -60,7 +60,7 @@ public class Controlador {
 
                             } while ((afectividad < 0 || afectividad > 10) || (curiosidad < 0 || curiosidad > 10));
 
-                            modelo.agregarGato(nombre, 0, 100, 100, 100, afectividad, curiosidad);
+                            modelo.agregarGato(nombre, 0, 10, 10, 10, afectividad, curiosidad);
                             break;
 
                         case 3: //Se crea Cuyo
@@ -71,19 +71,71 @@ public class Controlador {
                                 miedo = vista.leerNumero("Escribe el nivel de miedo: ");
                             } while ((territorial < 0 || territorial > 10) || (miedo < 0 || miedo > 10));
 
-                            modelo.agregarCuyo(nombre, 0, 100, 100, 100, territorial, miedo);
+                            modelo.agregarCuyo(nombre, 0, 10, 10, 10, territorial, miedo);
                             break;
 
                         case 4: //Se crea muñeca
-                            modelo.agregarMuneca(nombre, 0, 100, 100, 100);
+                            modelo.agregarMuneca(nombre, 0, 10, 10, 10);
                             break;
                     }
                     break;
 
                 case 2:
-                    System.out.println("Lista de Tamagotchis");
+                    System.out.println("/////////// Lista de Tamagotchis ///////////");
                     vista.mostrarDatos(modelo.listaJuguetes());
+                    System.out.println("\n");
+
                     break;
+
+                case 3:
+                    StringBuffer cadena = new StringBuffer();
+                    for (Tamagotchi t:modelo.getArrayList()) {
+                        if (t instanceof Perro) {
+                            Perro x = (Perro) t;
+                            cadena.append(x.toString());
+                        }
+                    }
+                    System.out.println("///// Mascotas de tipo Perro //////");
+                    System.out.println(cadena);
+                    break;
+
+                case 4:
+                    StringBuffer cadena2 = new StringBuffer();
+                    for (Tamagotchi t:modelo.getArrayList()) {
+                        if (t instanceof Gato) {
+                            Gato x = (Gato) t;
+                            cadena2.append(x.toString());
+                        }
+                    }
+                    System.out.println("///// Mascotas de tipo Gato //////");
+                    System.out.println(cadena2);
+                    break;
+
+                    case 5:
+                    StringBuffer cadena3 = new StringBuffer();
+                    for (Tamagotchi t:modelo.getArrayList()) {
+                        if (t instanceof Cuyo) {
+                            Cuyo x = (Cuyo) t;
+                            cadena3.append(x.toString());
+                        }
+                    }
+                    System.out.println("///// Mascotas de tipo Cuyo //////");
+                    System.out.println(cadena3);
+                    break;
+
+                case 6:
+                    StringBuffer cadena4 = new StringBuffer();
+                    for (Tamagotchi t:modelo.getArrayList()) {
+                        if (t instanceof Muneca) {
+                            Muneca x = (Muneca) t;
+                            cadena4.append(x.toString());
+                        }
+                    }
+                    System.out.println("///// Mascotas de tipo Muñeca //////");
+                    System.out.println(cadena4);
+                    break;
+
+
 
                 case 7:
                     int numeroDeLista = 1;
@@ -334,12 +386,6 @@ public class Controlador {
                     else {
                         System.out.println("Ingresa una mascota valida!");
                     }
-
-
-
-                    break;
-                case 3:
-                    System.out.println();
                     break;
             }
 
