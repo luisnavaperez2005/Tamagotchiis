@@ -57,6 +57,7 @@ public class VistaConsola {
         System.out.println("2. Darle alimento");
         System.out.println("3. Ponerla/o a dormir");
         System.out.println("4. Curarlo");
+        System.out.println("5. Salir");
     }
 
 
