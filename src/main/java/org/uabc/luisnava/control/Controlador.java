@@ -2,6 +2,9 @@ package org.uabc.luisnava.control;
 
 import org.uabc.luisnava.modelo.*;
 import org.uabc.luisnava.vista.VistaConsola;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import java.util.ArrayList;
 
@@ -9,6 +12,11 @@ import java.util.ArrayList;
 public class Controlador {
     private VistaConsola vista;
     private Coleccion modelo;
+
+    //Para el tiempo
+    ScheduledExecutorService temporizador = Executors.newSingleThreadScheduledExecutor();
+
+
 
     public Controlador(VistaConsola vista, Coleccion modelo){
         this.vista = vista;
@@ -18,6 +26,146 @@ public class Controlador {
     public void iniciar(){
         int op = 0;
         int tp = 0;
+
+        temporizador.scheduleAtFixedRate(() -> {
+            for (Tamagotchi t:modelo.getArrayList()){
+                if (t instanceof Perro) {
+                    if (!((Perro) t).morir()) {
+                        t.disminuirEnergia();
+                        ((Perro) t).morir();
+                    }
+                }
+
+                else if (t instanceof Gato){
+                    if (!((Gato) t).morir()) {
+                        t.disminuirEnergia();
+                        ((Gato) t).morir();
+                    }
+                }
+
+                else if (t instanceof Cuyo) {
+                    if (!((Cuyo) t).morir()) {
+                        t.disminuirEnergia();
+                        ((Cuyo) t).morir();
+                    }
+                }
+
+                else if (t instanceof Muneca) {
+                    if (!((Muneca) t).morir()) {
+                        t.disminuirEnergia();
+                        ((Muneca) t).morir();
+                    }
+                }
+
+
+            }
+        }, 3, 3, TimeUnit.MINUTES);
+
+
+        temporizador.scheduleAtFixedRate(() -> {
+            for (Tamagotchi t:modelo.getArrayList()){
+                if (t instanceof Perro) {
+                    if (!((Perro) t).morir()) {
+                        t.aumentarHambre();
+                        ((Perro) t).morir();
+                    }
+                }
+
+                else if (t instanceof Gato){
+                    if (!((Gato) t).morir()) {
+                        t.aumentarHambre();
+                        ((Gato) t).morir();
+                    }
+                }
+
+                else if (t instanceof Cuyo) {
+                    if (!((Cuyo) t).morir()) {
+                        t.aumentarHambre();
+                        ((Cuyo) t).morir();
+                    }
+                }
+
+                else if (t instanceof Muneca) {
+                    if (!((Muneca) t).morir()) {
+                        t.aumentarHambre();
+                        ((Muneca) t).morir();
+                    }
+                }
+
+
+            }
+        }, 2, 2, TimeUnit.MINUTES);
+
+        temporizador.scheduleAtFixedRate(() -> {
+            for (Tamagotchi t:modelo.getArrayList()){
+                if (t instanceof Perro) {
+                    if (!((Perro) t).morir()) {
+                        t.disminuirFelicidad();
+                        ((Perro) t).morir();
+                    }
+                }
+
+                else if (t instanceof Gato){
+                    if (!((Gato) t).morir()) {
+                        t.disminuirFelicidad();
+                        ((Gato) t).morir();
+                    }
+                }
+
+                else if (t instanceof Cuyo) {
+                    if (!((Cuyo) t).morir()) {
+                        t.disminuirFelicidad();
+                        ((Cuyo) t).morir();
+                    }
+                }
+
+                else if (t instanceof Muneca) {
+                    if (!((Muneca) t).morir()) {
+                        t.disminuirFelicidad();
+                        ((Muneca) t).morir();
+                    }
+                }
+
+
+            }
+        }, 1, 1, TimeUnit.MINUTES);
+
+        temporizador.scheduleAtFixedRate(() -> {
+            for (Tamagotchi t:modelo.getArrayList()){
+                if (t instanceof Perro) {
+                    if (!((Perro) t).morir()) {
+                        t.disminuirSalud();
+                        ((Perro) t).morir();
+                    }
+                }
+
+                else if (t instanceof Gato){
+                    if (!((Gato) t).morir()) {
+                        t.disminuirSalud();
+                        ((Gato) t).morir();
+                    }
+                }
+
+                else if (t instanceof Cuyo) {
+                    if (!((Cuyo) t).morir()) {
+                        t.disminuirSalud();
+                        ((Cuyo) t).morir();
+                    }
+                }
+
+                else if (t instanceof Muneca) {
+                    if (!((Muneca) t).morir()) {
+                        t.disminuirSalud();
+                        ((Muneca) t).morir();
+                    }
+                }
+
+
+            }
+        }, 5, 5, TimeUnit.MINUTES);
+
+
+
         do {
             op = vista.mostrarMenu();
 
@@ -161,8 +309,25 @@ public class Controlador {
                             }
 
                             if (murio) {
+                                if (modelo.getArrayList().get(opcionParaMascota - 1).getSalud() <= 0){
+                                    vista.muertePorSalud();
+                                }
 
-                            } else {
+                                else if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() <= 0){
+                                    vista.muertePorEnergia();
+                                }
+
+                                else if (modelo.getArrayList().get(opcionParaMascota - 1).getFelicidad() <= 0){
+                                    vista.muertePorFelicidad();
+                                }
+
+                                else if (modelo.getArrayList().get(opcionParaMascota - 1).getHambre() >= 10){
+                                    vista.muertePorHambre();
+                                }
+                                break;
+
+                            }
+                            else {
                                 int opcionMenuMascotas;
 
                                 System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
@@ -170,6 +335,20 @@ public class Controlador {
                                 opcionMenuMascotas = vista.leerNumero("");
 
                                 if (t instanceof Perro) {
+                                    murio = ((Perro) t).morir();
+                                } else if (t instanceof Gato) {
+                                    murio = ((Gato) t).morir();
+                                } else if (t instanceof Cuyo) {
+                                    murio = ((Cuyo) t).morir();
+                                } else if (t instanceof Muneca) {
+                                    murio = ((Muneca) t).morir();
+                                }
+
+                                if (murio){
+                                    break;
+                                }
+
+                                else if (t instanceof Perro) {
                                     switch (opcionMenuMascotas) {
                                         case 1:
                                             ((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).jugar();
@@ -434,6 +613,7 @@ public class Controlador {
                                 }
 
                             }
+
                         } while (opcionParaMascota !=  5 && !murio);
                     }
                     else {
