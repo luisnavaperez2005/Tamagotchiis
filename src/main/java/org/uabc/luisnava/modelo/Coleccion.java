@@ -37,6 +37,7 @@ public class Coleccion {
 
 
 
+
     public String listaJuguetes(){
         StringBuffer cadena = new StringBuffer();
         for (Tamagotchi t:misJuguetes){
