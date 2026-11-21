@@ -3,8 +3,8 @@ package org.uabc.luisnava.vista;
 import java.util.Scanner;
 
 public class VistaConsola {
-    Scanner leerNumeros = new Scanner(System.in);
-    Scanner leerCadenas = new Scanner(System.in);
+    Scanner leerDatos = new Scanner(System.in);
+
 
 
     public void mostrarDatos(String cadena){
@@ -14,13 +14,15 @@ public class VistaConsola {
     //Para leer y regresar datos tipo cadena
     public String leerCadena(String cadena){
         System.out.println(cadena);
-        return leerCadenas.nextLine();
+        return leerDatos.nextLine();
     }
 
     //Para leer y regresar datos tipo cadena
     public int leerNumero(String cadena){
         System.out.println(cadena);
-        return leerCadenas.nextInt();
+        int numero = leerDatos.nextInt();
+        leerDatos.nextLine();
+        return numero;
     }
 
     public int mostrarMenu(){
@@ -33,7 +35,9 @@ public class VistaConsola {
         System.out.println("7. Elegir la mascota para interactuar con ella");
         System.out.println("8. Salir del menu.");
 
-        return leerNumeros.nextInt();
+        int numero = leerDatos.nextInt();
+        leerDatos.nextLine();
+        return numero;
     }
 
     public int mostrarOpcionesTamagotchi(){
@@ -42,8 +46,19 @@ public class VistaConsola {
         System.out.println("2. Gato");
         System.out.println("3. Cuyo");
         System.out.println("4. Muñeca");
-        return leerNumeros.nextInt();
+        int numero = leerDatos.nextInt();
+        leerDatos.nextLine();
+        return numero;
     }
+
+    public void mostrarMenuOpcionesMascotas(){
+        System.out.println("¿Que quieres hacer con la mascota?");
+        System.out.println("1. Jugar con el/ella");
+        System.out.println("2. Darle alimento");
+        System.out.println("3. Ponerla/o a dormir");
+        System.out.println("4. Curarlo");
+    }
+
 
 /*
 
