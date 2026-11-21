@@ -60,6 +60,22 @@ public class VistaConsola {
         System.out.println("5. Salir");
     }
 
+    public void muertePorHambre(){
+        System.out.println("OH NO! Dejaste morir a tu mascota de hambre! IRRESPONSABLE!");
+    }
+
+    public void muertePorFelicidad(){
+        System.out.println("OH NO! Dejaste morir a tu mascota de aburrimiento! IRRESPONSABLE!");
+    }
+
+    public void muertePorEnergia(){
+        System.out.println("OH NO! Dejaste morir a tu mascota de sueño! IRRESPONSABLE!");
+    }
+
+    public void muertePorSalud(){
+        System.out.println("OH NO! Dejaste morir a tu mascota! Descuidaste su salud, IRRESPONSABLE!");
+    }
+
 
 /*
 
