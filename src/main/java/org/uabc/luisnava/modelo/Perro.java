@@ -24,17 +24,33 @@ public class Perro extends Tamagotchi implements TamagotchiActions {
 
     @Override
     public void comer(int alimento) {
-        System.out.println("Estoy comiendo un sobre de Pedigree! :D");
-        hambre--;
-        energia++;
+        switch (alimento){
+            case 1:
+                System.out.println("Estoy comiendo un sobre de Pedigree! :D");
+                energia += 3;
+                hambre -= 2;
+                break;
+            case 2:
+                System.out.println("Estoy masticando un hueso! :D");
+                energia += 1;
+                hambre -= 2;
+                break;
+            case 3:
+                System.out.println("Estoy comiendo croquetas! :D");
+                energia += 2;
+                hambre -= 3;
+                break;
+            default:
+                System.out.println("Alimento invalido! No me diste nada :,(");
+        }
 
         if (energia > 10){
             energia = 10;
         }
-
         if (hambre < 0){
             hambre = 0;
         }
+
 
     }
 
