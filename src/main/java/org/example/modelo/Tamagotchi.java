@@ -2,7 +2,8 @@ package org.example.modelo;
 
 //instantOff
 
-public class Tamagotchi {
+//instantOff para saber si un objeto es de cierto tipo
+public abstract class Tamagotchi {
     protected String nombre;
     protected int hambre;
     protected int energia;
@@ -73,4 +74,9 @@ public class Tamagotchi {
         return salud;
     }
 
+    //Se tiene que agregar el toString de Tamagotchi
+
+    public String toString(){
+        return nombre + "\nHambre: " + hambre + " puntos\nEnergia: " + energia + " puntos\nFelicidad: " + felicidad +" puntos\nSalud: " + salud + " puntos\n ";
+    }
 }

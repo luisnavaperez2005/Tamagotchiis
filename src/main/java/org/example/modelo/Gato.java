@@ -4,7 +4,6 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
     private int nivelAfectividad;
     private int nivelCuriosidad;
 
-
     public Gato(String nombre, int hambre, int energia, int felicidad, int salud, int afectividad, int curiosidad){
         super(nombre, hambre, energia, felicidad, salud);
         this.nivelAfectividad = afectividad;
@@ -13,15 +12,29 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
 
     public Gato(){
         super("Petunia", 8, 5, 4, 7);
-        nivelAfectividad = 8;
-        nivelCuriosidad = 10;
     }
 
     @Override
     public void comer(int alimento) {
-        System.out.println("Estoy comiendo " + alimento);
-        alimento--;
-        energia++;
+        switch (alimento){
+            case 1:
+                System.out.println("Estoy comiendo un sobre de Whiskas! :D");
+                energia += 3;
+                hambre -= 2;
+                break;
+            case 2:
+                System.out.println("Estoy comiendo pescado! :D");
+                energia += 1;
+                hambre -= 2;
+                break;
+            case 3:
+                System.out.println("Estoy tomando leche tibia! :D");
+                energia += 2;
+                hambre -= 3;
+                break;
+            default:
+                System.out.println("Alimento invalido! No me diste nada :,(");
+        }
     }
 
     @Override
@@ -31,19 +44,71 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
 
     @Override
     public int dormir(int horasDeSueno) {
-        return 0;
+        switch(horasDeSueno){
+            case 1:
+                energia++;
+                break;
+            case 2:
+                energia += 2;
+                break;
+            case 3:
+                energia += 3;
+                break;
+            case 4:
+                energia += 4;
+                break;
+            case 5:
+                energia += 5;
+                break;
+            case 6:
+                energia += 6;
+                break;
+            case 7:
+                energia += 7;
+                break;
+            case 8:
+                energia += 8;
+                break;
+            case 9:
+                energia += 9;
+                break;
+        }
+
+        System.out.println(nombre + " Duerme en su habitad para gatos ZZZ ZZZ ZZZ ZZZ");
+
+        return energia;
     }
 
     @Override
     public boolean morir() {
-        return false;
+        boolean murio = false;
+
+        if (hambre == 0 || energia == 0 || felicidad == 0 || salud == 0){
+            murio = true;
+            System.out.println("OH NO! Dejaste morir a " + nombre + " ! IRRESPONSABLE!");
+        }
+
+        else if (energia == 0){
+            murio = true;
+            System.out.println("OH NO! Dejaste morir a "+ nombre + " de sueño! IRRESPONSABLE!");
+        }
+
+        else if (felicidad == 0){
+            murio = true;
+            System.out.println("OH NO! Dejaste morir a "+ nombre + " de aburrimiento! IRRESPONSABLE!");
+        }
+
+        if (salud == 0){
+            murio = true;
+            System.out.println("OH NO! Dejaste morir a "+ nombre + "! Descuidaste su salud, IRRESPONSABLE!");
+        }
+        return murio;
     }
 
     @Override
     public int sanar() {
-        return 0;
+        return salud = 10;
     }
-
 
     //Que hace solo el gato
     public void maullar(){
@@ -51,7 +116,7 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
     }
 
     public void limpiarse(){
-        System.out.println("*Se lame*");
+        System.out.println("El gato se esta limpiando!");
     }
 
     public void ronronear(){
@@ -59,11 +124,26 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
     }
 
     public void aranar(){
-        System.out.println("*Rasguña*");
+        System.out.println("Cuidado, el gato te ha rasguñado!");
     }
 
-    @Override
     public String toString(){
-        return nombre + " tiene:  " + hambre + " de hambre, " +  energia + " de energía, " + felicidad + " pts de felicidad, " + salud + " pts de salud, " + nivelAfectividad + " pts de afectividad, " + nivelCuriosidad + " pts de curiosidad.";
+        return "Tipo de Mascota: GATO\n"+ super.toString() + "Afectividad: "+ nivelAfectividad + "puntos\nCuriosidad: " + nivelCuriosidad + "puntos\n";
+    }
+
+    public int getNivelAfectividad() {
+        return nivelAfectividad;
+    }
+
+    public void setNivelAfectividad(int nivelAfectividad) {
+        this.nivelAfectividad = nivelAfectividad;
+    }
+
+    public int getNivelCuriosidad() {
+        return nivelCuriosidad;
+    }
+
+    public void setNivelCuriosidad(int nivelCuriosidad) {
+        this.nivelCuriosidad = nivelCuriosidad;
     }
 }

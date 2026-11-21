@@ -21,33 +21,103 @@ public class Perro extends Tamagotchi implements TamagotchiActions {
         nivelOlfato = 10;
     }
 
-
     @Override
     public void comer(int alimento) {
-        System.out.println("Estoy comiendo " + alimento);
-        alimento--;
-        energia++;
+        switch (alimento){
+            case 1:
+                System.out.println("Estoy comiendo un sobre de Pedigree! :D");
+                energia += 3;
+                hambre -= 2;
+                break;
+            case 2:
+                System.out.println("Estoy masticando un hueso! :D");
+                energia += 1;
+                hambre -= 2;
+                break;
+            case 3:
+                System.out.println("Estoy comiendo croquetas! :D");
+                energia += 2;
+                hambre -= 3;
+                break;
+            default:
+                System.out.println("Alimento invalido! No me diste nada :,(");
+        }
     }
 
     @Override
     public int jugar() {
-        return 0;
+        energia--;
+        felicidad++;
+        return felicidad;
     }
-
+    //Cambiar a switch-case
     @Override
     public int dormir(int horasDeSueno) {
-        return 0;
+        switch(horasDeSueno){
+            case 1:
+                energia++;
+                break;
+            case 2:
+                energia += 2;
+                break;
+            case 3:
+                energia += 3;
+                break;
+            case 4:
+                energia += 4;
+                break;
+            case 5:
+                energia += 5;
+                break;
+            case 6:
+                energia += 6;
+                break;
+            case 7:
+                energia += 7;
+                break;
+            case 8:
+                energia += 8;
+                break;
+            case 9:
+                energia += 9;
+                break;
+        }
+        System.out.println(nombre + " Duerme en su casa de madera ZZZ ZZZ ZZZ");
+        return energia;
     }
 
     @Override
     public boolean morir() {
-        return false;
+        boolean murio = false;
+
+        if (hambre == 0 || energia == 0 || felicidad == 0 || salud == 0){
+            murio = true;
+            System.out.println("OH NO! Dejaste morir a "+ nombre + " ! IRRESPONSABLE!");
+        }
+
+        else if (energia == 0){
+            murio = true;
+            System.out.println("OH NO! Dejaste morir a "+ nombre + " de sueño! IRRESPONSABLE!");
+        }
+
+        else if (felicidad == 0){
+            murio = true;
+            System.out.println("OH NO! Dejaste morir a "+ nombre + " de aburrimiento! IRRESPONSABLE!");
+        }
+
+        if (salud == 0){
+            murio = true;
+            System.out.println("OH NO! Dejaste morir a "+ nombre + "! Descuidaste su salud, IRRESPONSABLE!");
+        }
+
+        return murio;
     }
 
     @Override
     public int sanar() {
-        return 0;
+        return salud = 10;
     }
+
 
     public int getNivelImperactividad() {
         return nivelImperactividad;
@@ -73,6 +143,10 @@ public class Perro extends Tamagotchi implements TamagotchiActions {
         System.out.println("AAUU!!");
     }
 
+    public void grunir (){
+        System.out.println("GRRRRR GRRRR >:(");
+    }
+
     public int getNivelOlfato() {
         return nivelOlfato;
     }
@@ -81,8 +155,13 @@ public class Perro extends Tamagotchi implements TamagotchiActions {
         this.nivelOlfato = nivelOlfato;
     }
 
-    @Override
+    public void perseguirCola(){
+        System.out.println(nombre + " Esta persiguiendo su Cola :D");
+        energia--;
+        felicidad++;
+    }
+
     public String toString(){
-        return nombre + " tiene:  " + hambre + " de hambre, " +  energia + " de energía, " + felicidad + " pts de felicidad, " + salud + " pts de salud, " + nivelAgresividad + " pts de agresividad, " + nivelImperactividad + " pts de imperactividad, " + nivelOlfato + " calidad de olfato";
+        return "Tipo de Mascota: PERRO\n"+ super.toString() + "Agresividad: "+nivelAgresividad+"puntos\nHiperactividad: "+nivelImperactividad+"\n";
     }
 }
