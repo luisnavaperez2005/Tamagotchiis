@@ -146,32 +146,41 @@ public class Controlador {
 
 
                     int opcionParaMascota = vista.leerNumero("Elige la mascota: ");
-                    if (opcionParaMascota >= 1 && opcionParaMascota<= modelo.getTamanoArrayList()){
-                        System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
-                        vista.mostrarMenuOpcionesMascotas();
-                        int opcionMenuMascotas = vista.leerNumero("");
-                        Tamagotchi t = modelo.getArrayList().get(opcionParaMascota - 1);
+                    if (opcionParaMascota >= 1 && opcionParaMascota<= modelo.getTamanoArrayList()) {
+                        Tamagotchi t;
+                        if (((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).morir() ||
+                                ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).morir() ||
+                                ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).morir() ||
+                                ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).morir()) {
+                            //Murio la mascota
+                        }
 
-                        if (t instanceof Perro){
-                            switch (opcionMenuMascotas){
-                                case 1:
-                                    ((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).jugar();
-                                    if (modelo.getArrayList().get(opcionParaMascota - 1).getFelicidad() > 10){
-                                        modelo.getArrayList().get(opcionParaMascota - 1).setFelicidad(10);
-                                    }
+                        else {
+                            System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
+                            vista.mostrarMenuOpcionesMascotas();
+                            int opcionMenuMascotas = vista.leerNumero("");
+                            t = modelo.getArrayList().get(opcionParaMascota - 1);
 
-                                    ((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).ladrar();
-                                    ((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).perseguirCola();
-                                    System.out.println("\n//////////Estadisticas Nuevas///////////");
-                                    System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
-                                    break;
+                            if (t instanceof Perro) {
+                                switch (opcionMenuMascotas) {
+                                    case 1:
+                                        ((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).jugar();
+                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getFelicidad() > 10) {
+                                            modelo.getArrayList().get(opcionParaMascota - 1).setFelicidad(10);
+                                        }
+
+                                        ((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).ladrar();
+                                        ((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).perseguirCola();
+                                        System.out.println("\n//////////Estadisticas Nuevas///////////");
+                                        System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
+                                        break;
 
                                     case 2:
                                         ((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).comer(1);
-                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getHambre() < 1){
+                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getHambre() < 1) {
                                             modelo.getArrayList().get(opcionParaMascota - 1).setHambre(0);
                                         }
-                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() > 10){
+                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() > 10) {
                                             modelo.getArrayList().get(opcionParaMascota - 1).setEnergia(10);
                                         }
 
@@ -191,7 +200,7 @@ public class Controlador {
                                         } while (horasDeSueno < 1 || horasDeSueno > 9);
                                         ((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).dormir(horasDeSueno);
 
-                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() > 10){
+                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() > 10) {
                                             modelo.getArrayList().get(opcionParaMascota - 1).setEnergia(10);
                                         }
 
@@ -207,182 +216,174 @@ public class Controlador {
 
                                         break;
                                 }
-                            }
-
-                        else if (t instanceof Gato){
-                            switch (opcionMenuMascotas){
-                                case 1:
-                                    ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).jugar();
-                                    if (modelo.getArrayList().get(opcionParaMascota - 1).getFelicidad() > 10){
-                                        modelo.getArrayList().get(opcionParaMascota - 1).setFelicidad(10);
-                                    }
-                                    ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).maullar();
-                                    System.out.println("\n//////////Estadisticas Nuevas///////////");
-                                    System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
-                                    break;
-
-                                case 2:
-                                    ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).comer(1);
-                                    ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).ronronear();
-                                    if (modelo.getArrayList().get(opcionParaMascota - 1).getHambre() < 1){
-                                        modelo.getArrayList().get(opcionParaMascota - 1).setHambre(0);
-                                    }
-                                    if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() > 10){
-                                        modelo.getArrayList().get(opcionParaMascota - 1).setEnergia(10);
-                                    }
-
-                                    System.out.println("\n//////////Estadisticas Nuevas///////////");
-                                    System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
-                                    break;
-
-                                case 3:
-                                    int horasDeSueno;
-                                    do {
-                                        horasDeSueno = vista.leerNumero("Cuantas horas quieres que duerma?");
-
-                                        if (horasDeSueno < 1 || horasDeSueno > 9) {
-                                            System.out.printf("Ingresa horas validas! (1 a 9)");
+                            } else if (t instanceof Gato) {
+                                switch (opcionMenuMascotas) {
+                                    case 1:
+                                        ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).jugar();
+                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getFelicidad() > 10) {
+                                            modelo.getArrayList().get(opcionParaMascota - 1).setFelicidad(10);
                                         }
-
-                                    } while (horasDeSueno < 1 || horasDeSueno > 9);
-                                    ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).dormir(horasDeSueno);
-
-                                    if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() > 10){
-                                        modelo.getArrayList().get(opcionParaMascota - 1).setEnergia(10);
-                                    }
-                                    System.out.println("\n//////////Estadisticas Nuevas///////////");
-                                    System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
-
-                                    break;
-                                case 4:
-                                    ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).sanar();
-                                    System.out.println("\n//////////Estadisticas Nuevas///////////");
-                                    System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
-                                    break;
-                                case 5:
-                                    ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).limpiarse();
-                                    System.out.println("\n//////////Estadisticas Nuevas///////////");
-                                    System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
-                                    break;
-
-                            }
-                        }
-
-                        else if (t instanceof Cuyo){
-                            switch (opcionMenuMascotas) {
-                                case 1:
-                                    ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).jugar();
-                                    if (modelo.getArrayList().get(opcionParaMascota - 1).getFelicidad() > 10) {
-                                        modelo.getArrayList().get(opcionParaMascota - 1).setFelicidad(10);
-                                    }
-                                    ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).silbido();
-                                    System.out.println("\n//////////Estadisticas Nuevas///////////");
-                                    System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
-                                    break;
-
-                                case 2:
-                                    ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).comer(1);
-                                    ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).silbido();
-                                    if (modelo.getArrayList().get(opcionParaMascota - 1).getHambre() < 1) {
-                                        modelo.getArrayList().get(opcionParaMascota - 1).setHambre(0);
-                                    }
-                                    if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() > 10) {
-                                        modelo.getArrayList().get(opcionParaMascota - 1).setEnergia(10);
-                                    }
-
-                                    System.out.println("\n//////////Estadisticas Nuevas///////////");
-                                    System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
-                                    break;
-
-                                case 3:
-                                    int horasDeSueno;
-                                    do {
-                                        horasDeSueno = vista.leerNumero("Cuantas horas quieres que duerma?");
-
-                                        if (horasDeSueno < 1 || horasDeSueno > 9) {
-                                            System.out.printf("Ingresa horas validas! (1 a 9)");
-                                        }
-
-                                    } while (horasDeSueno < 1 || horasDeSueno > 9);
-                                    ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).dormir(horasDeSueno);
-
-                                    if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() > 10) {
-                                        modelo.getArrayList().get(opcionParaMascota - 1).setEnergia(10);
+                                        ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).maullar();
                                         System.out.println("\n//////////Estadisticas Nuevas///////////");
                                         System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
-                                    }
+                                        break;
 
-                                    break;
-                                case 4:
-                                    ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).sanar();
-                                    System.out.println("\n//////////Estadisticas Nuevas///////////");
-                                    System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
-                                    break;
-                            }
-                        }
-
-                        else if (t instanceof Muneca){
-                            switch (opcionMenuMascotas) {
-                                case 1:
-                                    ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).jugar();
-                                    if (modelo.getArrayList().get(opcionParaMascota - 1).getFelicidad() > 10) {
-                                        modelo.getArrayList().get(opcionParaMascota - 1).setFelicidad(10);
-                                    }
-                                    ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).hablar("Que divertido! Me gusta mucho jugar!");
-                                    ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).jugar();
-                                    System.out.println("\n//////////Estadisticas Nuevas///////////");
-                                    System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
-                                    break;
-
-                                case 2:
-                                    ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).comer(1);
-                                    ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).hablar("Esta muy buena la comida!");
-                                    if (modelo.getArrayList().get(opcionParaMascota - 1).getHambre() < 1) {
-                                        modelo.getArrayList().get(opcionParaMascota - 1).setHambre(0);
-                                    }
-                                    if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() > 10) {
-                                        modelo.getArrayList().get(opcionParaMascota - 1).setEnergia(10);
-                                    }
-
-                                    System.out.println("\n//////////Estadisticas Nuevas///////////");
-                                    System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
-                                    break;
-
-                                case 3:
-                                    int horasDeSueno;
-                                    do {
-                                        horasDeSueno = vista.leerNumero("Cuantas horas quieres que duerma?");
-
-                                        if (horasDeSueno < 1 || horasDeSueno > 9) {
-                                            System.out.printf("Ingresa horas validas! (1 a 9)");
+                                    case 2:
+                                        ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).comer(1);
+                                        ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).ronronear();
+                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getHambre() < 1) {
+                                            modelo.getArrayList().get(opcionParaMascota - 1).setHambre(0);
+                                        }
+                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() > 10) {
+                                            modelo.getArrayList().get(opcionParaMascota - 1).setEnergia(10);
                                         }
 
-                                    } while (horasDeSueno < 1 || horasDeSueno > 9);
-                                    ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).dormir(horasDeSueno);
+                                        System.out.println("\n//////////Estadisticas Nuevas///////////");
+                                        System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
+                                        break;
 
-                                    if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() > 10) {
-                                        modelo.getArrayList().get(opcionParaMascota - 1).setEnergia(10);
-                                    }
+                                    case 3:
+                                        int horasDeSueno;
+                                        do {
+                                            horasDeSueno = vista.leerNumero("Cuantas horas quieres que duerma?");
 
-                                    ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).hablar("Que buena siesta tome!");
-                                    System.out.println("\n//////////Estadisticas Nuevas///////////");
-                                    System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
+                                            if (horasDeSueno < 1 || horasDeSueno > 9) {
+                                                System.out.printf("Ingresa horas validas! (1 a 9)");
+                                            }
 
-                                    break;
-                                case 4:
-                                    ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).sanar();
-                                    System.out.println("\n//////////Estadisticas Nuevas///////////");
-                                    System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
-                                    break;
+                                        } while (horasDeSueno < 1 || horasDeSueno > 9);
+                                        ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).dormir(horasDeSueno);
+
+                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() > 10) {
+                                            modelo.getArrayList().get(opcionParaMascota - 1).setEnergia(10);
+                                        }
+                                        System.out.println("\n//////////Estadisticas Nuevas///////////");
+                                        System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
+
+                                        break;
+                                    case 4:
+                                        ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).sanar();
+                                        System.out.println("\n//////////Estadisticas Nuevas///////////");
+                                        System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
+                                        break;
+                                    case 5:
+                                        ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).limpiarse();
+                                        System.out.println("\n//////////Estadisticas Nuevas///////////");
+                                        System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
+                                        break;
+
+
+                                }
+
+                            } else if (t instanceof Cuyo) {
+                                switch (opcionMenuMascotas) {
+                                    case 1:
+                                        ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).jugar();
+                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getFelicidad() > 10) {
+                                            modelo.getArrayList().get(opcionParaMascota - 1).setFelicidad(10);
+                                        }
+                                        ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).silbido();
+                                        System.out.println("\n//////////Estadisticas Nuevas///////////");
+                                        System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
+                                        break;
+
+                                    case 2:
+                                        ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).comer(1);
+                                        ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).silbido();
+                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getHambre() < 1) {
+                                            modelo.getArrayList().get(opcionParaMascota - 1).setHambre(0);
+                                        }
+                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() > 10) {
+                                            modelo.getArrayList().get(opcionParaMascota - 1).setEnergia(10);
+                                        }
+
+                                        System.out.println("\n//////////Estadisticas Nuevas///////////");
+                                        System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
+                                        break;
+
+                                    case 3:
+                                        int horasDeSueno;
+                                        do {
+                                            horasDeSueno = vista.leerNumero("Cuantas horas quieres que duerma?");
+
+                                            if (horasDeSueno < 1 || horasDeSueno > 9) {
+                                                System.out.printf("Ingresa horas validas! (1 a 9)");
+                                            }
+
+                                        } while (horasDeSueno < 1 || horasDeSueno > 9);
+                                        ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).dormir(horasDeSueno);
+
+                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() > 10) {
+                                            modelo.getArrayList().get(opcionParaMascota - 1).setEnergia(10);
+                                            System.out.println("\n//////////Estadisticas Nuevas///////////");
+                                            System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
+                                        }
+
+                                        break;
+                                    case 4:
+                                        ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).sanar();
+                                        System.out.println("\n//////////Estadisticas Nuevas///////////");
+                                        System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
+                                        break;
+                                }
+
+                            } else if (t instanceof Muneca) {
+                                switch (opcionMenuMascotas) {
+                                    case 1:
+                                        ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).jugar();
+                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getFelicidad() > 10) {
+                                            modelo.getArrayList().get(opcionParaMascota - 1).setFelicidad(10);
+                                        }
+                                        ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).hablar("Que divertido! Me gusta mucho jugar!");
+                                        ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).jugar();
+                                        System.out.println("\n//////////Estadisticas Nuevas///////////");
+                                        System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
+                                        break;
+
+                                    case 2:
+                                        ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).comer(1);
+                                        ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).hablar("Esta muy buena la comida!");
+                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getHambre() < 1) {
+                                            modelo.getArrayList().get(opcionParaMascota - 1).setHambre(0);
+                                        }
+                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() > 10) {
+                                            modelo.getArrayList().get(opcionParaMascota - 1).setEnergia(10);
+                                        }
+
+                                        System.out.println("\n//////////Estadisticas Nuevas///////////");
+                                        System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
+                                        break;
+
+                                    case 3:
+                                        int horasDeSueno;
+                                        do {
+                                            horasDeSueno = vista.leerNumero("Cuantas horas quieres que duerma?");
+
+                                            if (horasDeSueno < 1 || horasDeSueno > 9) {
+                                                System.out.printf("Ingresa horas validas! (1 a 9)");
+                                            }
+
+                                        } while (horasDeSueno < 1 || horasDeSueno > 9);
+                                        ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).dormir(horasDeSueno);
+
+                                        if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() > 10) {
+                                            modelo.getArrayList().get(opcionParaMascota - 1).setEnergia(10);
+                                        }
+
+                                        ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).hablar("Que buena siesta tome!");
+                                        System.out.println("\n//////////Estadisticas Nuevas///////////");
+                                        System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
+
+                                        break;
+                                    case 4:
+                                        ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).sanar();
+                                        System.out.println("\n//////////Estadisticas Nuevas///////////");
+                                        System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
+                                        break;
+                                }
                             }
                         }
-
-
-
-
                     }
-
-
                     else {
                         System.out.println("Ingresa una mascota valida!");
                     }
