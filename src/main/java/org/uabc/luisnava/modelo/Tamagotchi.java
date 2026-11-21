@@ -1,7 +1,7 @@
 package org.uabc.luisnava.modelo;
 
 //instantOff para saber si un objeto es de cierto tipo
-public abstract class Tamagotchi {
+public abstract class Tamagotchi implements TamagotchiActions{
     protected String nombre;
     protected int hambre;
     protected int energia;
@@ -76,6 +76,21 @@ public abstract class Tamagotchi {
 
     public String toString(){
         return nombre + "\nHambre: " + hambre + " puntos\nEnergia: " +energia+ " puntos\nFelicidad: " +felicidad +" puntos\nSalud: " + salud + " puntos\n";
+    }
+
+    public void disminuirStats(){
+        if (energia > 0){
+            energia--;
+        }
+        if (hambre < 10){
+            hambre++;
+        }
+        if (felicidad > 0){
+            felicidad--;
+        }
+        if (salud > 0){
+            salud--;
+        }
     }
 
 
