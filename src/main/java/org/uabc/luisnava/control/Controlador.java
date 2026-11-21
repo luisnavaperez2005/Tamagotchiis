@@ -27,6 +27,7 @@ public class Controlador {
         int op = 0;
         int tp = 0;
 
+
         temporizador.scheduleAtFixedRate(() -> {
             for (Tamagotchi t:modelo.getArrayList()){
                 if (t instanceof Perro) {
