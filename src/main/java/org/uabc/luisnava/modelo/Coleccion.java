@@ -74,4 +74,8 @@ public class Coleccion {
         return misJuguetes;
     }
 
+    public Tamagotchi getTamaotchiPosicion (int posicion){
+        return misJuguetes.get(posicion);
+    }
+
 }
