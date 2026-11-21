@@ -25,7 +25,7 @@ public class Perro extends Tamagotchi implements TamagotchiActions {
     @Override
     public void comer(int alimento) {
         System.out.println("Estoy comiendo un sobre de Pedigree! :D");
-        alimento--;
+        hambre--;
         energia++;
     }
 
@@ -33,6 +33,7 @@ public class Perro extends Tamagotchi implements TamagotchiActions {
     public int jugar() {
         energia--;
         felicidad++;
+        System.out.println("El perro salio a correr! Se canso un poco!");
         return felicidad;
     }
     //Cambiar a switch-case
@@ -75,9 +76,9 @@ public class Perro extends Tamagotchi implements TamagotchiActions {
     public boolean morir() {
         boolean murio = false;
 
-        if (hambre == 0 || energia == 0 || felicidad == 0 || salud == 0){
+        if (hambre == 10){
             murio = true;
-            System.out.println("OH NO! Dejaste morir a "+ nombre + " ! IRRESPONSABLE!");
+            System.out.println("OH NO! Dejaste morir a "+ nombre + " de hambre ! IRRESPONSABLE!");
         }
 
 
@@ -103,7 +104,9 @@ public class Perro extends Tamagotchi implements TamagotchiActions {
 
     @Override
     public int sanar() {
-        return salud = 10;
+        System.out.println("Le has dado CAPROFENO a tu perro! Se ha curado!");
+        salud = 10;
+        return salud;
     }
 
 
@@ -145,12 +148,11 @@ public class Perro extends Tamagotchi implements TamagotchiActions {
 
     public void perseguirCola(){
         System.out.println(nombre + " Esta persiguiendo su Cola :D");
-        energia--;
-        felicidad++;
+
     }
 
     public String toString(){
-        return "Tipo de Mascota: PERRO\n"+ super.toString() + "Agresividad: "+nivelAgresividad+"puntos\nHiperactividad: "+nivelImperactividad+"\n";
+        return "\nTipo de Mascota: PERRO\n"+ super.toString() + "Agresividad: "+nivelAgresividad+" puntos\nHiperactividad: "+nivelImperactividad+"puntos\n\n";
     }
 
 
