@@ -223,8 +223,16 @@ public class Controlador {
                             modelo.agregarCuyo(nombre, 0, 10, 10, 10, territorial, miedo);
                             break;
 
-                        case 4: //Se crea muñeca
-                            modelo.agregarMuneca(nombre, 0, 10, 10, 10);
+                        case 4://Se crea muñeca
+                            int aburrimiento;
+                            int nivelDeObediencia;
+
+                            do {
+                                aburrimiento = vista.leerNumero("Escribe el nivel que tiene de territorial: ");
+                                nivelDeObediencia = vista.leerNumero("Escribe el nivel de miedo: ");
+                            } while ((aburrimiento < 0 || aburrimiento > 10) || (nivelDeObediencia < 0 || nivelDeObediencia > 10));
+
+                            modelo.agregarMuneca(nombre, 0, 10, 10, 10, aburrimiento, nivelDeObediencia);
                             break;
                     }
                     break;
@@ -298,6 +306,7 @@ public class Controlador {
                     if (opcionParaMascota >= 1 && opcionParaMascota<= modelo.getTamanoArrayList()) {
                         Tamagotchi t = modelo.getArrayList().get(opcionParaMascota - 1);
                         boolean murio = false;
+                        int opcionMenuMascotas = 0;
                         do {
                             if (t instanceof Perro) {
                                 murio = ((Perro) t).morir();
@@ -329,8 +338,6 @@ public class Controlador {
 
                             }
                             else {
-                                int opcionMenuMascotas;
-
                                 System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
                                 vista.mostrarMenuOpcionesMascotas();
                                 opcionMenuMascotas = vista.leerNumero("");
@@ -364,7 +371,15 @@ public class Controlador {
                                             break;
 
                                         case 2:
-                                            ((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).comer(1);
+                                            int comidaPerro;
+                                            do{
+                                                comidaPerro = vista.mostrarMenuComidaPerro();
+                                                if (comidaPerro < 1 || comidaPerro > 3){
+                                                    System.out.println("Opción invalida!, elige una opción entre 1 y 3");
+                                                }
+                                            } while (comidaPerro < 1 || comidaPerro > 3);
+
+                                            ((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).comer(comidaPerro);
                                             if (modelo.getArrayList().get(opcionParaMascota - 1).getHambre() < 1) {
                                                 modelo.getArrayList().get(opcionParaMascota - 1).setHambre(0);
                                             }
@@ -424,7 +439,14 @@ public class Controlador {
                                             break;
 
                                         case 2:
-                                            ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).comer(1);
+                                            int comidaGato;
+                                            do {
+                                                comidaGato = vista.mostrarMenuComidaGato();
+                                                if (comidaGato < 1 || comidaGato > 3){
+                                                    System.out.println("Opción invalida!, elige una opción entre 1 y 3");
+                                                }
+                                            } while (comidaGato < 1 || comidaGato > 3);
+                                            ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).comer(comidaGato);
                                             ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).ronronear();
                                             if (modelo.getArrayList().get(opcionParaMascota - 1).getHambre() < 1) {
                                                 modelo.getArrayList().get(opcionParaMascota - 1).setHambre(0);
@@ -484,7 +506,14 @@ public class Controlador {
                                             break;
 
                                         case 2:
-                                            ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).comer(1);
+                                            int comidaCuyo;
+                                            do{
+                                                comidaCuyo = vista.mostrarMenuComidaCuyo();
+                                                if (comidaCuyo < 1 || comidaCuyo > 3){
+                                                    System.out.println("Opción invalida!, elige una opción entre 1 y 3");
+                                                }
+                                            }while (comidaCuyo < 1 || comidaCuyo > 3);
+                                            ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).comer(comidaCuyo);
                                             ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).silbido();
                                             if (modelo.getArrayList().get(opcionParaMascota - 1).getHambre() < 1) {
                                                 modelo.getArrayList().get(opcionParaMascota - 1).setHambre(0);
@@ -564,7 +593,14 @@ public class Controlador {
                                             break;
 
                                         case 2:
-                                            ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).comer(1);
+                                            int comidaMuneca;
+                                            do{
+                                                comidaMuneca = vista.mostrarMenuComidaMuneca();
+                                                if (comidaMuneca < 1 || comidaMuneca > 3){
+                                                    System.out.println("Opción invalida!, elige una opción entre 1 y 3");
+                                                }
+                                            }while (comidaMuneca < 1 || comidaMuneca > 3);
+                                            ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).comer(comidaMuneca);
                                             ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).hablar("Tu muñeca dijo: Esta muy buena la comida! Gracias!");
                                             if (modelo.getArrayList().get(opcionParaMascota - 1).getHambre() < 1) {
                                                 modelo.getArrayList().get(opcionParaMascota - 1).setHambre(0);
@@ -615,7 +651,7 @@ public class Controlador {
 
                             }
 
-                        } while (opcionParaMascota !=  5 && !murio);
+                        } while (opcionMenuMascotas !=  5 && !murio);
                     }
                     else {
                         System.out.println("Ingresa una mascota valida!");
