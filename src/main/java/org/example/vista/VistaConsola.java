@@ -58,6 +58,7 @@ public class VistaConsola {
         System.out.println("5. Volver al menú principal");
     }
 
+    // menus de comida
     public int mostrarMenuComidaPerro(){
         System.out.println("¿Qué le quieres dar de comer a tu tamagotchi Perro?");
         System.out.println("1. Sobre Pedigree");
@@ -85,6 +86,52 @@ public class VistaConsola {
         System.out.println("2. Pastel");
         System.out.println("3. Té");
         return leerNumero("Elige una opción: ");
+    }
+
+    // menus de juego
+    public int mostrarMenuJuegoPerro() {
+        System.out.println("¿A qué quieres jugar con tu Perro?");
+        System.out.println("1. Lanzar la pelota");
+        System.out.println("2. Correr en el parque");
+        System.out.println("3. Escondite");
+        return leerNumero("Elige una opción: ");
+    }
+    public int mostrarMenuJuegoGato() {
+        System.out.println("¿A qué quieres jugar con tu Gato?");
+        System.out.println("1. Perseguir al ratón");
+        System.out.println("2. Corretear la bola de estambre");
+        System.out.println("3. Seguir el lazer");
+        return leerNumero("Elige una opción: ");
+    }
+    public int mostrarMenuJuegoCuyo() {
+        System.out.println("¿A qué quieres jugar con tu Cuyo?");
+        System.out.println("1. Encontrar el premio en el laberinto");
+        System.out.println("2. Roer el trozo de madera");
+        System.out.println("3. Correr en la rueda giratoria");
+        return leerNumero("Elige una opción: ");
+    }
+    public int mostrarMenuJuegoMuneca() {
+        System.out.println("¿A qué quieres jugar con tu Muñeca?");
+        System.out.println("1. Estetica de peinados");
+        System.out.println("2. Picnic de té y galletas");
+        System.out.println("3. Pasarela de moda");
+        return leerNumero("Elige una opción: ");
+    }
+
+    public void muertePorHambre(){
+        System.out.println("OH NO! Dejaste morir a tu mascota de hambre! IRRESPONSABLE!");
+    }
+
+    public void muertePorFelicidad(){
+        System.out.println("OH NO! Dejaste morir a tu mascota de aburrimiento! IRRESPONSABLE!");
+    }
+
+    public void muertePorEnergia(){
+        System.out.println("OH NO! Dejaste morir a tu mascota de sueño! IRRESPONSABLE!");
+    }
+
+    public void muertePorSalud(){
+        System.out.println("OH NO! Dejaste morir a tu mascota! Descuidaste su salud, IRRESPONSABLE!");
     }
 /*
     public void imprimirPerro(){

@@ -23,25 +23,68 @@ public class Muneca extends Tamagotchi implements TamagotchiActions{
                 System.out.println("Estoy comiendo galletas! :D");
                 energia += 3;
                 hambre -= 2;
+                felicidad += 2;
                 break;
             case 2:
                 System.out.println("Estoy comiendo pastel! :D");
                 energia += 2;
                 hambre -= 3;
+                felicidad += 3;
                 break;
             case 3:
                 System.out.println("Estoy tomando té! :D");
                 energia += 1;
                 hambre -= 1;
+                felicidad += 1;
                 break;
             default:
                 System.out.println("Alimento invalido! No me diste nada :,(");
         }
+
+        if (energia > 10) {
+            energia = 10;
+        }
+
+        if (hambre < 0) {
+            hambre = 0;
+        }
+
+        if (felicidad > 10) {
+            felicidad = 10;
+        }
+        durmiendo = false;
     }
 
     @Override
-    public int jugar() {
-        return 0;
+    public int jugar(int juego) {
+        durmiendo = false;
+        switch (juego) {
+            case 1:
+                System.out.println(nombre + " se preina frente al espejo!");
+                felicidad += 2;
+                energia -= 1;
+                break;
+            case 2:
+                System.out.println(nombre + " toma su té feliz y come galletas!");
+                felicidad += 3;
+                energia -= 2;
+                break;
+            case 3:
+                System.out.println(nombre + " modela su vestido!");
+                felicidad += 4;
+                energia -= 3;
+                break;
+            default:
+                System.out.println("Juego inválido!");
+        }
+        if (felicidad > 10){
+            felicidad = 10;
+        }
+
+        if (energia < 0){
+            energia = 0;
+        }
+        return felicidad;
     }
 
     @Override
@@ -75,7 +118,8 @@ public class Muneca extends Tamagotchi implements TamagotchiActions{
                 energia += 9;
                 break;
         }
-        System.out.println(nombre + " Duerme en su cama ZZZ ZZZ ZZZ");
+        System.out.println(nombre + " se hace bolita, ronronea y duerme en su cama ZZZ ZZZ ZZZ");
+        durmiendo = true;
         return energia;
     }
 
@@ -83,18 +127,14 @@ public class Muneca extends Tamagotchi implements TamagotchiActions{
     public boolean morir() {
         boolean murio = false;
 
-        if (hambre == 0 || energia == 0 || felicidad == 0 || salud == 0){
+        if (hambre == 10){
             murio = true;
-            System.out.println("OH NO! Dejaste morir a "+ nombre + " ! IRRESPONSABLE!");
+            System.out.println("OH NO! Dejaste morir a "+ nombre + " de hambre ! IRRESPONSABLE!");
         }
-
-
         else if (energia == 0){
             murio = true;
             System.out.println("OH NO! Dejaste morir a "+ nombre + " de sueño! IRRESPONSABLE!");
         }
-
-
         else if (felicidad == 0){
             murio = true;
             System.out.println("OH NO! Dejaste morir a "+ nombre + " de aburrimiento! IRRESPONSABLE!");
@@ -146,7 +186,7 @@ public class Muneca extends Tamagotchi implements TamagotchiActions{
         return nivelObediencia;
     }
 
-    public String toString(String toString){
-        return super.toString() + "";
+    public String toString(){
+        return "Tipo de Mascota: MUÑECA\n" + super.toString() + "Aburrimiento: " + nivelAburrimiento + " puntos\nObediencia: " + nivelObediencia + " puntos\n\n";
     }
 }

@@ -2,10 +2,14 @@ package org.example.control;
 
 import org.example.modelo.*;
 import org.example.vista.VistaConsola;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Controlador {
     private VistaConsola vista;
     private Coleccion modelo;
+    ScheduledExecutorService temporizador = Executors.newSingleThreadScheduledExecutor();
 
     public Controlador(VistaConsola vista, Coleccion modelo){
         this.vista = vista;
@@ -15,6 +19,144 @@ public class Controlador {
     public void iniciar(){
         int op = 0;
         int tp = 0;
+
+        temporizador.scheduleAtFixedRate(() -> {
+            for (Tamagotchi t:modelo.getArrayList()){
+                if (t instanceof Perro) {
+                    if (!((Perro) t).morir()) {
+                        t.disminuirEnergia();
+                        ((Perro) t).morir();
+                    }
+                }
+
+                else if (t instanceof Gato){
+                    if (!((Gato) t).morir()) {
+                        t.disminuirEnergia();
+                        ((Gato) t).morir();
+                    }
+                }
+
+                else if (t instanceof Cuyo) {
+                    if (!((Cuyo) t).morir()) {
+                        t.disminuirEnergia();
+                        ((Cuyo) t).morir();
+                    }
+                }
+
+                else if (t instanceof Muneca) {
+                    if (!((Muneca) t).morir()) {
+                        t.disminuirEnergia();
+                        ((Muneca) t).morir();
+                    }
+                }
+
+
+            }
+        }, 3, 3, TimeUnit.MINUTES);
+
+
+        temporizador.scheduleAtFixedRate(() -> {
+            for (Tamagotchi t:modelo.getArrayList()){
+                if (t instanceof Perro) {
+                    if (!((Perro) t).morir()) {
+                        t.aumentarHambre();
+                        ((Perro) t).morir();
+                    }
+                }
+
+                else if (t instanceof Gato){
+                    if (!((Gato) t).morir()) {
+                        t.aumentarHambre();
+                        ((Gato) t).morir();
+                    }
+                }
+
+                else if (t instanceof Cuyo) {
+                    if (!((Cuyo) t).morir()) {
+                        t.aumentarHambre();
+                        ((Cuyo) t).morir();
+                    }
+                }
+
+                else if (t instanceof Muneca) {
+                    if (!((Muneca) t).morir()) {
+                        t.aumentarHambre();
+                        ((Muneca) t).morir();
+                    }
+                }
+
+
+            }
+        }, 2, 2, TimeUnit.MINUTES);
+
+        temporizador.scheduleAtFixedRate(() -> {
+            for (Tamagotchi t:modelo.getArrayList()){
+                if (t instanceof Perro) {
+                    if (!((Perro) t).morir()) {
+                        t.disminuirFelicidad();
+                        ((Perro) t).morir();
+                    }
+                }
+
+                else if (t instanceof Gato){
+                    if (!((Gato) t).morir()) {
+                        t.disminuirFelicidad();
+                        ((Gato) t).morir();
+                    }
+                }
+
+                else if (t instanceof Cuyo) {
+                    if (!((Cuyo) t).morir()) {
+                        t.disminuirFelicidad();
+                        ((Cuyo) t).morir();
+                    }
+                }
+
+                else if (t instanceof Muneca) {
+                    if (!((Muneca) t).morir()) {
+                        t.disminuirFelicidad();
+                        ((Muneca) t).morir();
+                    }
+                }
+
+
+            }
+        }, 1, 1, TimeUnit.MINUTES);
+
+        temporizador.scheduleAtFixedRate(() -> {
+            for (Tamagotchi t:modelo.getArrayList()){
+                if (t instanceof Perro) {
+                    if (!((Perro) t).morir()) {
+                        t.disminuirSalud();
+                        ((Perro) t).morir();
+                    }
+                }
+
+                else if (t instanceof Gato){
+                    if (!((Gato) t).morir()) {
+                        t.disminuirSalud();
+                        ((Gato) t).morir();
+                    }
+                }
+
+                else if (t instanceof Cuyo) {
+                    if (!((Cuyo) t).morir()) {
+                        t.disminuirSalud();
+                        ((Cuyo) t).morir();
+                    }
+                }
+
+                else if (t instanceof Muneca) {
+                    if (!((Muneca) t).morir()) {
+                        t.disminuirSalud();
+                        ((Muneca) t).morir();
+                    }
+                }
+
+
+            }
+        }, 5, 5, TimeUnit.MINUTES);
+
         do {
             op = vista.mostrarMenu();
 
@@ -71,7 +213,13 @@ public class Controlador {
                             break;
 
                         case 4: //Se crea muñeca
-                            modelo.agregarMuneca(nombre, 0, 10, 10, 10, 1, 10);
+                            int aburrimiento;
+                            int nivelDeObediencia;
+                            do {
+                                aburrimiento = vista.leerNumero("Escribe el nivel de aburrimiento: ");
+                                nivelDeObediencia = vista.leerNumero("Escribe el nivel de obediencia: ");
+                            } while ((aburrimiento < 0 || aburrimiento > 10) || (nivelDeObediencia < 0 || nivelDeObediencia > 10));
+                            modelo.agregarMuneca(nombre, 0, 10, 10, 10, aburrimiento, nivelDeObediencia);
                             break;
                     }
                     break;
@@ -142,6 +290,8 @@ public class Controlador {
                     if (opcionParaMascota >= 1 && opcionParaMascota<= modelo.getTamanoArrayList()) {
                         Tamagotchi t = modelo.getArrayList().get(opcionParaMascota - 1);
                         boolean murio = false;
+                        int opcionMenuMascotas = 0;
+
                         do {
                             if (t instanceof Perro) {
                                 murio = ((Perro) t).morir();
@@ -154,21 +304,48 @@ public class Controlador {
                             }
 
                             if (murio) {
-                                ///// que paso ahi?
+                                if (modelo.getArrayList().get(opcionParaMascota - 1).getSalud() <= 0){
+                                    vista.muertePorSalud();
+                                }
+                                else if (modelo.getArrayList().get(opcionParaMascota - 1).getEnergia() <= 0){
+                                    vista.muertePorEnergia();
+                                }
+                                else if (modelo.getArrayList().get(opcionParaMascota - 1).getFelicidad() <= 0){
+                                    vista.muertePorFelicidad();
+                                }
+                                else if (modelo.getArrayList().get(opcionParaMascota - 1).getHambre() >= 10){
+                                    vista.muertePorHambre();
+                                }
+                                break;
                             } else {
-                                int opcionMenuMascotas;
                                 System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
                                 vista.mostrarMenuOpcionesMascotas();
                                 opcionMenuMascotas = vista.leerNumero("");
 
-                                if (t instanceof Perro){
+                                if (t instanceof Perro) {
+                                    murio = ((Perro) t).morir();
+                                } else if (t instanceof Gato) {
+                                    murio = ((Gato) t).morir();
+                                } else if (t instanceof Cuyo) {
+                                    murio = ((Cuyo) t).morir();
+                                } else if (t instanceof Muneca) {
+                                    murio = ((Muneca) t).morir();
+                                }
+
+                                if (murio) {
+                                    break;
+                                } else if (t instanceof Perro){
                                     switch (opcionMenuMascotas){
                                         case 1:
-                                            ((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).jugar();
-                                            if (modelo.getArrayList().get(opcionParaMascota - 1).getFelicidad() > 10){
-                                                modelo.getArrayList().get(opcionParaMascota - 1).setFelicidad(10);
-                                            }
+                                            int juegoPerro;
+                                            do{
+                                                juegoPerro = vista.mostrarMenuJuegoPerro();
+                                                if (juegoPerro < 1 || juegoPerro > 3){
+                                                    System.out.println("Opción inválida!, elige una opción entre 1 y 3");
+                                                }
+                                            } while (juegoPerro < 1 || juegoPerro > 3);
 
+                                            ((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).jugar(juegoPerro);
                                             ((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).ladrar();
                                             ((Perro) modelo.getArrayList().get(opcionParaMascota - 1)).perseguirCola();
                                             System.out.println("\n//////////Estadisticas Nuevas///////////");
@@ -233,10 +410,14 @@ public class Controlador {
                                 else if (t instanceof Gato){
                                     switch (opcionMenuMascotas){
                                         case 1:
-                                            ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).jugar();
-                                            if (modelo.getArrayList().get(opcionParaMascota - 1).getFelicidad() > 10){
-                                                modelo.getArrayList().get(opcionParaMascota - 1).setFelicidad(10);
-                                            }
+                                            int juegoGato;
+                                            do{
+                                                juegoGato = vista.mostrarMenuJuegoGato();
+                                                if (juegoGato < 1 || juegoGato > 3) {
+                                                    System.out.println("Opción inválida!, elige una opción entre 1 y 3");
+                                                }
+                                            } while (juegoGato < 1 || juegoGato > 3);
+                                            ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).jugar(juegoGato);
                                             ((Gato) modelo.getArrayList().get(opcionParaMascota - 1)).maullar();
                                             System.out.println("\n//////////Estadisticas Nuevas///////////");
                                             System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
@@ -299,10 +480,14 @@ public class Controlador {
                                 else if (t instanceof Cuyo){
                                     switch (opcionMenuMascotas) {
                                         case 1:
-                                            ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).jugar();
-                                            if (modelo.getArrayList().get(opcionParaMascota - 1).getFelicidad() > 10) {
-                                                modelo.getArrayList().get(opcionParaMascota - 1).setFelicidad(10);
-                                            }
+                                            int juegoCuyo;
+                                            do{
+                                                juegoCuyo = vista.mostrarMenuJuegoCuyo();
+                                                if (juegoCuyo < 1 || juegoCuyo > 3) {
+                                                    System.out.println("Opción inválida!, elige una opción entre 1 y 3");
+                                                }
+                                            }while (juegoCuyo < 1 || juegoCuyo > 3);
+                                            ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).jugar(juegoCuyo);
                                             ((Cuyo) modelo.getArrayList().get(opcionParaMascota - 1)).silbido();
                                             System.out.println("\n//////////Estadisticas Nuevas///////////");
                                             System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
@@ -382,12 +567,16 @@ public class Controlador {
                                     }
                                     switch (opcionMenuMascotas) {
                                         case 1:
-                                            ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).jugar();
-                                            if (modelo.getArrayList().get(opcionParaMascota - 1).getFelicidad() > 10) {
-                                                modelo.getArrayList().get(opcionParaMascota - 1).setFelicidad(10);
-                                            }
+                                            int juegoMuneca;
+                                            do{
+                                                juegoMuneca = vista.mostrarMenuJuegoMuneca();
+                                                if (juegoMuneca < 1 || juegoMuneca > 3) {
+                                                    System.out.println("Opción inválida!, elige una opción entre 1 y 3");
+                                                }
+                                            } while (juegoMuneca < 1 || juegoMuneca > 3);
+
+                                            ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).jugar(juegoMuneca);
                                             ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).hablar("Tu muñeca dijo: Que divertido! Me gusta mucho jugar!");
-                                            ((Muneca) modelo.getArrayList().get(opcionParaMascota - 1)).jugar();
                                             System.out.println("\n//////////Estadisticas Nuevas///////////");
                                             System.out.println(modelo.getTamaotchiPosicion(opcionParaMascota - 1));
                                             break;
@@ -449,12 +638,13 @@ public class Controlador {
                                     }
                                 }
                             }
-                        } while (opcionParaMascota != 5 && !murio);
+                        } while (opcionMenuMascotas != 5 && !murio);
                     } else {
                         System.out.println("Ingresa una mascota valida!");
                     }
                     break;
             }
         } while (op != 8);
+        temporizador.shutdown();
     }
 }

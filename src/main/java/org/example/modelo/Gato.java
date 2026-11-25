@@ -21,25 +21,69 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
                 System.out.println("Estoy comiendo un sobre de Whiskas! :D");
                 energia += 3;
                 hambre -= 2;
+                felicidad += 2;
                 break;
             case 2:
                 System.out.println("Estoy comiendo pescado! :D");
                 energia += 1;
                 hambre -= 2;
+                felicidad += 3;
                 break;
             case 3:
                 System.out.println("Estoy tomando leche tibia! :D");
                 energia += 2;
                 hambre -= 3;
+                felicidad += 4;
                 break;
             default:
                 System.out.println("Alimento invalido! No me diste nada :,(");
         }
+
+        if (energia > 10) {
+            energia = 10;
+        }
+
+        if (hambre < 0) {
+            hambre = 0;
+        }
+
+        if (felicidad > 10) {
+            felicidad = 10;
+        }
+        durmiendo = false;
     }
 
     @Override
-    public int jugar() {
-        return 0;
+    public int jugar(int juego) {
+        durmiendo = false;
+        switch (juego) {
+            case 1:
+                System.out.println(nombre + " persigue feroz su ratón!");
+                felicidad += 2;
+                energia -= 1;
+                break;
+            case 2:
+                System.out.println(nombre + " corre feliz tras su bola de estambre!");
+                felicidad += 3;
+                energia -= 2;
+                break;
+            case 3:
+                System.out.println(nombre + " persigue curioso el laser!");
+                felicidad += 4;
+                energia -= 3;
+                break;
+            default:
+                System.out.println("Juego inválido!");
+        }
+        if (felicidad > 10){
+            felicidad = 10;
+        }
+
+        if (energia < 0){
+            energia = 0;
+        }
+
+        return felicidad;
     }
 
     @Override
@@ -76,6 +120,7 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
 
         System.out.println(nombre + " Duerme en su habitad para gatos ZZZ ZZZ ZZZ ZZZ");
 
+        durmiendo = true;
         return energia;
     }
 
@@ -83,16 +128,14 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
     public boolean morir() {
         boolean murio = false;
 
-        if (hambre == 0 || energia == 0 || felicidad == 0 || salud == 0){
+        if (hambre == 10){
             murio = true;
-            System.out.println("OH NO! Dejaste morir a " + nombre + " ! IRRESPONSABLE!");
+            System.out.println("OH NO! Dejaste morir a "+ nombre + " de hambre ! IRRESPONSABLE!");
         }
-
         else if (energia == 0){
             murio = true;
             System.out.println("OH NO! Dejaste morir a "+ nombre + " de sueño! IRRESPONSABLE!");
         }
-
         else if (felicidad == 0){
             murio = true;
             System.out.println("OH NO! Dejaste morir a "+ nombre + " de aburrimiento! IRRESPONSABLE!");
@@ -102,12 +145,15 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
             murio = true;
             System.out.println("OH NO! Dejaste morir a "+ nombre + "! Descuidaste su salud, IRRESPONSABLE!");
         }
+
         return murio;
     }
 
     @Override
     public int sanar() {
-        return salud = 10;
+        System.out.println("Le has dado BUPRENORFINA! Se ha curado!");
+        salud = 10;
+        return salud;
     }
 
     //Que hace solo el gato
@@ -128,7 +174,7 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
     }
 
     public String toString(){
-        return "Tipo de Mascota: GATO\n"+ super.toString() + "Afectividad: "+ nivelAfectividad + "puntos\nCuriosidad: " + nivelCuriosidad + "puntos\n";
+        return "\nTipo de Mascota: GATO\n"+ super.toString() + "Afectividad: "+ nivelAfectividad + "puntos\nCuriosidad: " + nivelCuriosidad + "puntos\n\n";
     }
 
     public int getNivelAfectividad() {
